@@ -46,10 +46,12 @@
             <div class="dropdown-menu form-group">
                 <button type="submit" class="dropdown-item" href="#" name="category" value="00">Select all</button>
                 <div class="dropdown-divider"></div>
+                <h6 class="dropdown-header">Categories</h6>
                 <div  th:each="cat : ${categories}">
                 <button type="submit" class="dropdown-item" href="#" name="category" th:attr="value='1'+${cat.getId()}" th:text="${cat.getName()}">category</button>
                 </div>
                 <div class="dropdown-divider"></div>
+                <h6 class="dropdown-header">Suppliers</h6>
                 <div  th:each="sup : ${suppliers}">
                     <button type="submit" class="dropdown-item" href="#" name="category" th:attr="value='2'+${sup.getId()}" th:text="${sup.getName()}">category</button>
                 </div>
