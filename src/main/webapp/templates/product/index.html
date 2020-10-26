@@ -35,9 +35,27 @@
 </div>
 
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
+<!--    <div class="card">-->
+<!--        <strong th:text="${category.name}">Category Title</strong>-->
+<!--    </div>-->
+    <form method="post">
+        <div class="btn-group">
+            <button type="submit" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${category}">
+                Select category
+            </button>
+            <div class="dropdown-menu form-group">
+                <button type="submit" class="dropdown-item" href="#" name="category" value="00">Select all</button>
+                <div class="dropdown-divider"></div>
+                <div  th:each="cat : ${categories}">
+                <button type="submit" class="dropdown-item" href="#" name="category" th:attr="value='1'+${cat.getId()}" th:text="${cat.getName()}">category</button>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div  th:each="sup : ${suppliers}">
+                    <button type="submit" class="dropdown-item" href="#" name="category" th:attr="value='2'+${sup.getId()}" th:text="${sup.getName()}">category</button>
+                </div>
+            </div>
+        </div>
+    </form><br><br>
 
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
