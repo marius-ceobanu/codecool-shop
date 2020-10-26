@@ -8,5 +8,5 @@ public interface CartDao {
     void add(int userId, Product product, int quantity);
     Cart find(int userId);
     void remove(int userId, Product product);
-    void removeOne(int userId, Product product);
+    void removeCount(int userId, Product product, int count);
 }

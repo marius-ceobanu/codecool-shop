@@ -75,4 +75,14 @@ public class Product extends BaseModel {
                 this.productCategory.getName(),
                 this.supplier.getName());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Product)) {
+            return false;
+        }
+
+        Product product = (Product) obj;
+        return product.getId() == this.getId();
+    }
 }

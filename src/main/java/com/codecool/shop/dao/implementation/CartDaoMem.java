@@ -28,7 +28,7 @@ public class CartDaoMem implements CartDao {
         Cart userCart = data.get(userId);
 
         if (!userCart.containsKey(product)) {
-            userCart.put(product, 1);
+            userCart.put(product, quantity);
         } else {
             userCart.replace(product, userCart.get(product) + 1);
         }
@@ -51,10 +51,10 @@ public class CartDaoMem implements CartDao {
     }
 
     @Override
-    public void removeOne(int userId, Product product) {
+    public void removeCount(int userId, Product product, int count) {
         Cart userCart = getCart(userId, product);
 
-        int quantity = userCart.get(product) - 1;
+        int quantity = userCart.get(product) - count;
         if (quantity > 0) {
             userCart.replace(product, quantity);
         } else {
