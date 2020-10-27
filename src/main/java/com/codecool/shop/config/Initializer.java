@@ -32,10 +32,14 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(amazon);
         Supplier lenovo = new Supplier("Lenovo", "Computers");
         supplierDataStore.add(lenovo);
+        Supplier apple = new Supplier("Apple", "Phones");
+        supplierDataStore.add(apple);
 
         //setting up a new product category
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         productCategoryDataStore.add(tablet);
+        ProductCategory phone = new ProductCategory("Phone", "Hardware", "A smart phone, commonly shortened to phone, is a thin, flat mobile phone with a touchscreen display.");
+        productCategoryDataStore.add(phone);
 
         //setting up products and printing it
         productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
@@ -47,5 +51,6 @@ public class Initializer implements ServletContextListener {
         cartDataStore.add(0, productDataStore.find(3), 3);
         cartDataStore.add(0, productDataStore.find(2), 1);
 
+        productDataStore.add(new Product("Iphone 12", 230, "USD", "Apple's latest Iphone 12 smart phone is a great value for media consumption.", phone, apple));
     }
 }
