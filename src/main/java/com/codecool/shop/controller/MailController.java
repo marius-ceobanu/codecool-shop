@@ -1,5 +1,7 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.model.Order;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -40,20 +42,23 @@ public class MailController {
         });
     }
 
-    public void sendTestMail() {
+    public void sendConfirmationMail(Order order) {
         try {
             Message message = new MimeMessage(session);
 
             message.setFrom(new InternetAddress(FROM_MAIL));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress("aaa@gmail.com"));
-            message.setSubject("Test");
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(order.getUserDetails().getEmail()));
+            message.setSubject("Order Confirmation");
 
-            message.setText("This is a test mail from Codecool Shop srl tm enterprises");
+            message.setText(String.format("Hello %s!%n%nThank you for your order to Codecool Shop srl tm enterprises from %td-%<tm-%<tY %<tH:%<tM!%n%nYour order should arrive in about 1 to 97 years.",
+                    order.getUserDetails().getFullName(),
+                    order.getOrderStart()
+            ));
 
             Transport.send(message);
-            System.out.println("Yey");
         } catch (MessagingException e) {
-            System.out.println("Boo");
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

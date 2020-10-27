@@ -2,7 +2,10 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.implementation.CartDaoMem;
+import com.codecool.shop.dao.implementation.OrderDaoMem;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.UserDetails;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -16,6 +19,9 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/checkout"})
 public class CheckoutController extends HttpServlet {
+
+    private final OrderDao orderDao = OrderDaoMem.getInstance();
+    private final CartDao cartDao = CartDaoMem.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +37,6 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         String fullName = context.getRequest().getParameter("name");
         String mobile = context.getRequest().getParameter("mobile");
@@ -41,7 +46,7 @@ public class CheckoutController extends HttpServlet {
         String county = context.getRequest().getParameter("county");
         String zipCode = context.getRequest().getParameter("zip");
         String paymentMethod = context.getRequest().getParameter("payment");
-        Boolean sameAddress = context.getRequest().getParameter("sameadr").equals("checked");
+        boolean sameAddress = context.getRequest().getParameter("sameadr").equals("checked");
 //        System.out.println(fullName);
 //        System.out.println(mobile);
 //        System.out.println(email);
@@ -52,6 +57,13 @@ public class CheckoutController extends HttpServlet {
 //        System.out.println(paymentMethod);
 //        System.out.println(sameAddress);
         UserDetails userDetails = new UserDetails(fullName, mobile, email, address, city, county, zipCode, sameAddress, paymentMethod);
+
+        orderDao.addUserDetails(0, userDetails); // TODO Replace with actual userId
+        orderDao.addCart(0, cartDao.find(0)); // TODO Replace with actual userId
+
+        Order order = orderDao.getOrder(0); // TODO Replace with actual userId
+        JsonExporter.getInstance().exportOrder(order);
+        MailController.getInstance().sendConfirmationMail(order);
 
         resp.sendRedirect("/");
 //        engine.process("checkout/index.html", context, resp.getWriter());
