@@ -40,14 +40,16 @@
         <div class="col-xl-9 bg-info">
             <ul class="list-group">
                 <li class="list-group-item d-flex">
-                    Name,price,quantity
+                    <span class="ml-5 mr-auto">Product</span>
+                    <span>Price</span>
+                    <span class="ml-4">Quantity</span>
                 </li>
                 <div id="product-container">
                     <li class="list-group-item d-flex align-items-center" th:each="product : ${cart}" th:attr="data-id=${product.key.id}">
                         <span><img th:attr="src='/static/img/product_' + ${product.key.id} + '.jpg'" height="50px"></span>
                         <span class="mr-auto" th:text="${product.getKey().getName()}"></span>
-                        <span th:text="${product.getKey().getPrice()}"></span>
-                        <span class="mx-2">x</span>
+                        <span class="mr-1" th:text="${product.getKey().getPrice()}"></span>
+                        <span class="mx-3">x</span>
                         <span th:text="${product.getValue()}"></span>
                         <span class="mx-1">
                             <div class="btn-group-vertical btn-group-sm my-n3" role="group" aria-label="Quantity">
