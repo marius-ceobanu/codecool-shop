@@ -15,9 +15,20 @@ function removeProduct(evt) {
     dataHandler.removeItemFromCart(productId, updateCart);
 }
 
+function getValue(string, field) {
+    let sub = string.substring(string.indexOf(field + ": ") + (field + ": ").length);
+    let end = sub.indexOf(',');
+    return sub.substring(0, end < 0 ? sub.length : end);
+}
+
 function refreshProduct(product, productData, count) {
-    console.log(productData);
-    // product.children[1].innerText = productData.name;
+    product.children[1].innerText = getValue(productData, "name");
+
+    let price = getValue(productData, "defaultPrice");
+    price = price.substring(0, price.indexOf('.') + 2);
+    product.children[2].innerText = price + " " + getValue(productData, "defaultCurrency");
+
+    product.children[4].innerText = count;
 }
 
 function refreshCart(data) {
@@ -30,9 +41,7 @@ function refreshCart(data) {
 
         for (let k in data) {
             if (data.hasOwnProperty(k)) {
-                // console.log(k);
-                // console.log(k.substring(4, k.indexOf(',')));
-                if (k.substring(4, k.indexOf(',')) === id) {
+                if (getValue(k, "id") === id) {
                     productData = k;
                     count = data[k];
                     break;
@@ -49,7 +58,7 @@ function refreshCart(data) {
     }
 }
 
-function updateCart(data) {
+function updateCart() {
     dataHandler.getCart(refreshCart);
 }
 
