@@ -56,6 +56,22 @@ function refreshCart(data) {
             i--;
         }
     }
+
+    refreshCartCount(data);
+}
+
+function refreshCartCount(cart) {
+    let count = 0;
+
+    for (let k in cart) {
+        if (cart.hasOwnProperty(k)) {
+            count += cart[k];
+        }
+    }
+
+    cartLabel.hidden = count === 0;
+
+    cartLabel.innerText = count;
 }
 
 function updateCart() {
@@ -68,8 +84,12 @@ function init() {
     document.querySelectorAll(".remove-btn").forEach(btn => btn.addEventListener("click", removeProduct));
 
     productContainer = document.querySelector("#product-container");
+    cartLabel = document.querySelector("#lblCartCount");
+
+    dataHandler.getCart(refreshCartCount);
 }
 
 let productContainer;
+let cartLabel;
 
 init();
