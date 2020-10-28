@@ -38,6 +38,7 @@ public class PaymentController extends HttpServlet {
         }
         JsonExporter.getInstance().exportOrder(order);
         MailController.getInstance().sendConfirmationMail(order);
+        orderDao.deleteOrder(0); // TODO Replace with actual userId
         resp.sendRedirect("/");
     }
 

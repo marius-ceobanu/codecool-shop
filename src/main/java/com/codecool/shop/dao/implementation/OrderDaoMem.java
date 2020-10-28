@@ -52,4 +52,9 @@ public class OrderDaoMem implements OrderDao {
 
         orders.get(userId).setPayment(payment);
     }
+
+    @Override
+    public void deleteOrder(int userId) {
+        orders.remove(userId);
+    }
 }

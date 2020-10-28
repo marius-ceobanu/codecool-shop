@@ -10,4 +10,5 @@ public interface OrderDao {
     void addCart(int userId, Cart cart);
     void addUserDetails(int userId, UserDetails userDetails);
     void addPayment(int userId, Payment payment);
+    void deleteOrder(int userId);
 }
