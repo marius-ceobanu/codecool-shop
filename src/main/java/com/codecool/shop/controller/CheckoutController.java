@@ -41,7 +41,7 @@ public class CheckoutController extends HttpServlet {
         String county = context.getRequest().getParameter("county");
         String zipCode = context.getRequest().getParameter("zip");
         String paymentMethod = context.getRequest().getParameter("payment");
-        Boolean sameAddress = context.getRequest().getParameter("sameadr").equals("checked");
+        boolean sameAddress = context.getRequest().getParameter("sameadr").equals("checked");
 //        System.out.println(fullName);
 //        System.out.println(mobile);
 //        System.out.println(email);
