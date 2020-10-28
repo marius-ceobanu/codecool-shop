@@ -64,9 +64,14 @@
                 </div>
             </ul>
         </div>
-        <div class="col-xl-3 bg-secondary">
-
-
+        <div class="col-xl-3">
+            <div class="bg-secondary d-flex flex-column text-light">
+                <div class="mr-3 mt-2 ml-auto" th:text="${cart.totalPrice()}"></div>
+                <div class="mr-3 ml-auto"> - 0</div>
+                <hr>
+                <div class="container-fluid d-flex mr-2 mb-2 ml-auto"><span>Total : </span><span class="price ml-auto" th:text="${cart.totalPrice()}"></span></div>
+            </div>
+            <a class="btn btn-info btn-block" href="/checkout" role="button">Proceed to checkout</a>
         </div>
     </div>
 </div>
