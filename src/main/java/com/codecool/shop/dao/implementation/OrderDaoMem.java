@@ -5,7 +5,6 @@ import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Payment;
 import com.codecool.shop.model.UserDetails;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Date;
 import java.util.HashMap;

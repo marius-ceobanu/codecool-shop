@@ -1,4 +1,4 @@
-import { dataHandler } from "./data_handler.js";
+import {dataHandler} from "./data_handler.js";
 
 function addProduct(evt) {
     let productId = evt.target.parentNode.parentNode.parentNode.dataset["id"];

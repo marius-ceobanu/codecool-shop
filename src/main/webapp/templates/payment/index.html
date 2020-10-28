@@ -37,8 +37,8 @@
 
 <div class="row pl-4 pt-4 mt-5">
     <div class="col-50">
-        <div class="container">
-            <form action="/checkout" method="post">
+        <div class="container" th:if="${method == 'card'}">
+            <form action="/checkout/payment" method="post">
 
                 <div>Accepted Cards</div>
                 <div class="icon-container">
@@ -65,7 +65,16 @@
                     </div>
                 </div>
 
-                <input type="submit" value="Confirm order" class="btn">
+                <input type="submit" value="Confirm payment" class="btn">
+            </form>
+        </div>
+        <div class="container" th:unless="${method == 'card'}">
+            <form action="/checkout/payment" method="post">
+
+                <div>Paypal payment placeholder
+                    <i class="fa fa-paypal"></i>
+                </div>
+                <input type="submit" value="Confirm payment" class="btn">
             </form>
         </div>
     </div>
