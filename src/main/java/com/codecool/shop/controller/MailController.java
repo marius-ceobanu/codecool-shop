@@ -31,7 +31,7 @@ public class MailController {
         properties.put("mail.smtp.auth", true);
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.mailtrap.io");
-        properties.put("mail.smtp.port", "25");
+        properties.put("mail.smtp.port", "465");
         properties.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
 
         session = Session.getInstance(properties, new Authenticator() {
