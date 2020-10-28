@@ -57,6 +57,9 @@ function refreshCart(data) {
         }
     }
 
+    console.log(children.length);
+    checkoutBtn.disabled = children.length === 0;
+
     refreshCartCount(data);
 }
 
@@ -85,11 +88,16 @@ function init() {
 
     productContainer = document.querySelector("#product-container");
     cartLabel = document.querySelector("#lblCartCount");
+    checkoutBtn = document.querySelector("#checkout-btn");
+
+    console.log(checkoutBtn);
 
     dataHandler.getCart(refreshCartCount);
 }
 
 let productContainer;
 let cartLabel;
+
+let checkoutBtn;
 
 init();
