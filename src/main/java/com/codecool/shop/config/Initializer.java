@@ -47,9 +47,9 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
         productDataStore.add(new Product("Iphone 12", 230, "USD", "Apple's latest Iphone 12 smart phone is a great value for media consumption.", phone, apple));
 
-        cartDataStore.add(0, productDataStore.find(1), 1);
-        cartDataStore.add(0, productDataStore.find(2), 1);
-        cartDataStore.add(0, productDataStore.find(3), 3);
-        cartDataStore.add(0, productDataStore.find(2), 1);
+//        cartDataStore.add(0, productDataStore.find(1), 1);
+//        cartDataStore.add(0, productDataStore.find(2), 1);
+//        cartDataStore.add(0, productDataStore.find(3), 3);
+//        cartDataStore.add(0, productDataStore.find(2), 1);
     }
 }
