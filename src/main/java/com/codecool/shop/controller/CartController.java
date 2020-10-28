@@ -3,6 +3,7 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.implementation.CartDaoMem;
+import com.codecool.shop.model.Cart;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -27,5 +28,10 @@ public class CartController extends HttpServlet {
 //        context.setVariable("category", productCategoryDataStore.find(1));
 //        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         engine.process("cart/index.html", context, resp.getWriter());
+
+        Cart cart = cartDataStore.find(0);
+        for (int i = 0; i < 100; i++) {
+            System.out.println(cart.totalPrice());
+        }
     }
 }

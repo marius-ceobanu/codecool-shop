@@ -16,6 +16,7 @@ public class Cart extends HashMap<Product, Integer> {
             float count = 0;
         };
         this.forEach(((product, quantity) -> lambdaContext.count += (product.getDefaultPrice() * quantity)));
-        return lambdaContext.count;
+//        return lambdaContext.count;
+        return (float)((int)(lambdaContext.count)) + (float)((int)(lambdaContext.count * 100) % 100) / 100; // Floating points for the f-ing win
     }
 }

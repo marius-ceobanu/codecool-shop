@@ -66,10 +66,10 @@
         </div>
         <div class="col-md-3">
             <div class="bg-secondary d-flex flex-column text-light">
-                <div class="mr-3 mt-2 ml-auto" th:text="${cart.totalPrice()}"></div>
+                <div class="mr-3 mt-2 ml-auto" id="cart-price" th:text="${cart.totalPrice()}"></div>
                 <div class="mr-3 ml-auto"> - 0</div>
                 <hr>
-                <div class="container-fluid d-flex mr-2 mb-2 ml-auto"><span>Total : </span><span class="price ml-auto" th:text="${cart.totalPrice()}"></span></div>
+                <div class="container-fluid d-flex mr-2 mb-2 ml-auto"><span>Total : </span><span class="ml-auto" id="cart-total" th:text="${cart.totalPrice()}"></span></div>
             </div>
             <button class="btn btn-info btn-block" id="checkout-btn" role="button" onclick="location.href='/checkout'" th:disabled="${cart.productCount()} == 0">Proceed to checkout</button>
         </div>
