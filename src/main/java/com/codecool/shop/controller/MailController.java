@@ -9,8 +9,8 @@ import java.util.Properties;
 
 public class MailController {
 
-    private static final String USER_NAME = "e2891148cc6876";
-    private static final String PASSWORD = "8233eb4dc1514c";
+    private static final String USER_NAME = "fa4acdf7d0038f";
+    private static final String PASSWORD = "15e92d46c99eac";
 
     private static final String FROM_MAIL = "noreply@ccshop.com";
 

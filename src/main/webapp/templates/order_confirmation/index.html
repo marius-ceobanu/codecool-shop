@@ -35,10 +35,11 @@
 </head>
 <body>
 
-<div th:replace="navbar.html :: copy"></div>
+<div th:replace="navbar.html :: copy"></div><br><br><br><br><br>
 
     <div class="jumbotron text-center">
         <h2>Thank You <span th:text="${order.getUserDetails().getFullName()}"></span>, order confirmed!</h2>
+        <img th:attr="src='/static/img/confirmation.png'" height="100px">
         <p class="lead"><strong>Please check your email</strong> for detailed information about your order.</p>
         <hr>
         <p>
