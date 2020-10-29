@@ -28,10 +28,5 @@ public class CartController extends HttpServlet {
 //        context.setVariable("category", productCategoryDataStore.find(1));
 //        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         engine.process("cart/index.html", context, resp.getWriter());
-
-        Cart cart = cartDataStore.find(0);
-        for (int i = 0; i < 100; i++) {
-            System.out.println(cart.totalPrice());
-        }
     }
 }
