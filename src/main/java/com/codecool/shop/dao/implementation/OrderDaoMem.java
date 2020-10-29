@@ -1,5 +1,6 @@
 package com.codecool.shop.dao.implementation;
 
+import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
@@ -21,6 +22,7 @@ public class OrderDaoMem implements OrderDao {
     }
 
     private final HashMap<Integer, Order> orders = new HashMap<>();
+    private final CartDao cartDao = CartDaoMem.getInstance();
 
     public Order getOrder(int userId) {
         return orders.get(userId);
@@ -55,6 +57,7 @@ public class OrderDaoMem implements OrderDao {
 
     @Override
     public void deleteOrder(int userId) {
+        cartDao.deleteCart(userId);
         orders.remove(userId);
     }
 }
