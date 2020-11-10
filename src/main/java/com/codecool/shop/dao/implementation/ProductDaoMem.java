@@ -10,7 +10,14 @@ import java.util.stream.Collectors;
 
 public class ProductDaoMem implements ProductDao {
 
-    private final List<Product> data = new ArrayList<>();
+    private List<Product> data = new ArrayList<>();
+
+    public ProductDaoMem() {
+    }
+
+    public ProductDaoMem(List<Product> data) {
+        this.data = data;
+    }
 
     @Override
     public void add(Product product) {
