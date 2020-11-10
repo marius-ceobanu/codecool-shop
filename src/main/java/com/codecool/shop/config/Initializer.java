@@ -8,7 +8,8 @@ import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.managers.DaoManger;
+import com.codecool.shop.manager.DaoManager;
+import com.codecool.shop.manager.DatabaseManager;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -16,6 +17,8 @@ import com.codecool.shop.model.Supplier;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.io.IOException;
+import java.sql.SQLException;
 
 @WebListener
 public class Initializer implements ServletContextListener {
@@ -23,14 +26,24 @@ public class Initializer implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
 
-        DaoManger daoManger = DaoManger.getInstance();
-        daoManger.setProductDao(new ProductDaoMem());
-        daoManger.setProductCategoryDao(new ProductCategoryDaoMem());
-        daoManger.setSupplierDao(new SupplierDaoMem());
+        DatabaseManager.setProperties("connection.properties");
 
-        ProductDao productDataStore = daoManger.getProductDao();
-        ProductCategoryDao productCategoryDataStore = daoManger.getProductCategoryDao();
-        SupplierDao supplierDataStore = daoManger.getSupplierDao();
+        try {
+            DatabaseManager.connect().close();
+
+            System.out.println("connection ok");
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+
+        DaoManager daoManager = DaoManager.getInstance();
+        daoManager.setProductDao(new ProductDaoMem());
+        daoManager.setProductCategoryDao(new ProductCategoryDaoMem());
+        daoManager.setSupplierDao(new SupplierDaoMem());
+
+        ProductDao productDataStore = daoManager.getProductDao();
+        ProductCategoryDao productCategoryDataStore = daoManager.getProductCategoryDao();
+        SupplierDao supplierDataStore = daoManager.getSupplierDao();
 
         CartDao cartDataStore = CartDaoMem.getInstance();
 

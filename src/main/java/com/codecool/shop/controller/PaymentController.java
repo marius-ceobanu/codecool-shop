@@ -5,6 +5,8 @@ import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.OrderDaoMem;
+import com.codecool.shop.manager.JsonManager;
+import com.codecool.shop.manager.MailManager;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Payment;
 import org.thymeleaf.TemplateEngine;
@@ -36,8 +38,8 @@ public class PaymentController extends HttpServlet {
             );
             order.setPayment(payment);
         }
-        JsonExporter.getInstance().exportOrder(order);
-        MailController.getInstance().sendConfirmationMail(order);
+        JsonManager.getInstance().exportOrder(order);
+        MailManager.getInstance().sendConfirmationMail(order);
         resp.sendRedirect("/checkout/payment/confirmation");
     }
 

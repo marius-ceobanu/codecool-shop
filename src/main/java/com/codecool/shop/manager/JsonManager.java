@@ -1,4 +1,4 @@
-package com.codecool.shop.controller;
+package com.codecool.shop.manager;
 
 import com.codecool.shop.model.Order;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -10,20 +10,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class JsonExporter {
+public class JsonManager {
 
     private static final String SAVE_PATH = "orders/";
 
-    private static JsonExporter instance = null;
+    private static JsonManager instance = null;
 
-    public static JsonExporter getInstance() {
+    public static JsonManager getInstance() {
         if (instance == null) {
-            instance = new JsonExporter();
+            instance = new JsonManager();
         }
         return instance;
     }
 
-    public JsonExporter() {
+    public JsonManager() {
         this.mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);

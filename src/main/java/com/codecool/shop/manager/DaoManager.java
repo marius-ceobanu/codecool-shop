@@ -1,22 +1,22 @@
-package com.codecool.shop.managers;
+package com.codecool.shop.manager;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
 
-public class DaoManger {
+public class DaoManager {
 
-    private static DaoManger instance = null;
+    private static DaoManager instance = null;
 
-    public static DaoManger getInstance() {
+    public static DaoManager getInstance() {
         if (instance == null) {
-            instance = new DaoManger();
+            instance = new DaoManager();
         }
 
         return instance;
     }
 
-    private DaoManger() {
+    private DaoManager() {
     }
 
     private ProductDao productDao;

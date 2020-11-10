@@ -1,4 +1,4 @@
-package com.codecool.shop.controller;
+package com.codecool.shop.manager;
 
 import com.codecool.shop.model.Order;
 
@@ -7,25 +7,25 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class MailController {
+public class MailManager {
 
     private static final String USER_NAME = "fa4acdf7d0038f";
     private static final String PASSWORD = "15e92d46c99eac";
 
     private static final String FROM_MAIL = "noreply@ccshop.com";
 
-    private static MailController instance = null;
+    private static MailManager instance = null;
 
-    public static MailController getInstance() {
+    public static MailManager getInstance() {
         if (instance == null) {
-            instance = new MailController();
+            instance = new MailManager();
         }
         return instance;
     }
 
     private final Session session;
 
-    MailController() {
+    MailManager() {
 //        Properties properties = System.getProperties();
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", true);
