@@ -8,6 +8,7 @@ import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.managers.DaoManger;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -21,9 +22,15 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+
+        DaoManger daoManger = DaoManger.getInstance();
+        daoManger.setProductDao(new ProductDaoMem());
+        daoManger.setProductCategoryDao(new ProductCategoryDaoMem());
+        daoManger.setSupplierDao(new SupplierDaoMem());
+
+        ProductDao productDataStore = daoManger.getProductDao();
+        ProductCategoryDao productCategoryDataStore = daoManger.getProductCategoryDao();
+        SupplierDao supplierDataStore = daoManger.getSupplierDao();
 
         CartDao cartDataStore = CartDaoMem.getInstance();
 

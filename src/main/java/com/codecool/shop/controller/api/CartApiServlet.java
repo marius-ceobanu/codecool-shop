@@ -4,6 +4,7 @@ import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.managers.DaoManger;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ import java.io.IOException;
 public class CartApiServlet extends HttpServlet {
 
     CartDao cartDataStore = CartDaoMem.getInstance();
-    ProductDao productDataStore = ProductDaoMem.getInstance();
+    ProductDao productDataStore = DaoManger.getInstance().getProductDao();
     ObjectMapper mapper = new ObjectMapper();
 
     @Override
