@@ -9,7 +9,14 @@ import java.util.List;
 
 public class ProductCategoryDaoMem implements ProductCategoryDao {
 
-    private final List<ProductCategory> data = new ArrayList<>();
+    private List<ProductCategory> data = new ArrayList<>();
+
+    public ProductCategoryDaoMem() {
+    }
+
+    public ProductCategoryDaoMem(List<ProductCategory> data) {
+        this.data = data;
+    }
 
     @Override
     public void add(ProductCategory category) {
