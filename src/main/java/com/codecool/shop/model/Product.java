@@ -6,15 +6,14 @@ public class Product extends BaseModel {
 
     private float defaultPrice;
     private Currency defaultCurrency;
-    private ProductCategory productCategory;
-    private Supplier supplier;
+    private int categoryId;
+    private int supplierId;
 
-
-    public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
+    public Product(String name, float defaultPrice, String currencyString, String description, int categoryId, int supplierId) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
-        this.setSupplier(supplier);
-        this.setProductCategory(productCategory);
+        this.categoryId = categoryId;
+        this.supplierId = supplierId;
     }
 
     public float getDefaultPrice() {
@@ -42,22 +41,20 @@ public class Product extends BaseModel {
         this.defaultCurrency = Currency.getInstance(currency);
     }
 
-    public ProductCategory getProductCategory() {
-        return productCategory;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
-        this.productCategory.addProduct(this);
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public Supplier getSupplier() {
-        return supplier;
+    public int getSupplierId() {
+        return supplierId;
     }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-        this.supplier.addProduct(this);
+    public void setSupplierId(int supplierId) {
+        this.supplierId = supplierId;
     }
 
     @Override
@@ -72,8 +69,8 @@ public class Product extends BaseModel {
                 this.name,
                 this.defaultPrice,
                 this.defaultCurrency.toString(),
-                this.productCategory.getName(),
-                this.supplier.getName());
+                this.categoryId,
+                this.supplierId);
     }
 
     @Override

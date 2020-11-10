@@ -54,15 +54,15 @@ public class Initializer implements ServletContextListener {
         productCategoryDataStore.add(mouse);
 
         //setting up products and printing it
-        productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
-        productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
-        productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
-        productDataStore.add(new Product("Iphone 12", 230, "USD", "Apple's latest Iphone 12 smart phone is a great value for media consumption.", phone, apple));
-        productDataStore.add(new Product("Playstation 5", 530, "USD", "Sony launches the brand new gaming console, that support 8K", gameConsole, sony));
-        productDataStore.add(new Product("Xbox One", 560, "USD", "Xbox launches the brand new gaming console, that support 8K", gameConsole, microsoft));
-        productDataStore.add(new Product("Razer Blade 15", 760, "USD", "Perfect laptop for gaming, stronger than ever", laptop, razer));
-        productDataStore.add(new Product("MacBook Pro 15", 1650, "USD", "Apple laptop, newest apple technology in a 15 inch case", laptop, apple));
-        productDataStore.add(new Product("Razer gaming mouse", 76, "USD", "Best mouse for gaming, Razer guarantees highest accuracy for shooting your opponents, Yeeei, Die!", mouse, razer));
+        productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet.getId(), amazon.getId()));
+        productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet.getId(), lenovo.getId()));
+        productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet.getId(), amazon.getId()));
+        productDataStore.add(new Product("Iphone 12", 230, "USD", "Apple's latest Iphone 12 smart phone is a great value for media consumption.", phone.getId(), apple.getId()));
+        productDataStore.add(new Product("Playstation 5", 530, "USD", "Sony launches the brand new gaming console, that support 8K", gameConsole.getId(), sony.getId()));
+        productDataStore.add(new Product("Xbox One", 560, "USD", "Xbox launches the brand new gaming console, that support 8K", gameConsole.getId(), microsoft.getId()));
+        productDataStore.add(new Product("Razer Blade 15", 760, "USD", "Perfect laptop for gaming, stronger than ever", laptop.getId(), razer.getId()));
+        productDataStore.add(new Product("MacBook Pro 15", 1650, "USD", "Apple laptop, newest apple technology in a 15 inch case", laptop.getId(), apple.getId()));
+        productDataStore.add(new Product("Razer gaming mouse", 76, "USD", "Best mouse for gaming, Razer guarantees highest accuracy for shooting your opponents, Yeeei, Die!", mouse.getId(), razer.getId()));
 
 //        cartDataStore.add(0, productDataStore.find(1), 1);
 //        cartDataStore.add(0, productDataStore.find(2), 1);
