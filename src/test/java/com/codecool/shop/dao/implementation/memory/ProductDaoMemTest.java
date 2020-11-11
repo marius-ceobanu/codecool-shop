@@ -1,9 +1,9 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.memory;
 
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
 import com.codecool.shop.model.Product;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,20 +34,20 @@ class ProductDaoMemTest {
     }
 
     @Test
-    void addProduct_newProduct_returnInsertedProduct() {
+    void add_newProduct_returnInsertedProduct() {
         setUpEmpty();
         productDao.add(testProduct);
         Assertions.assertEquals(testProduct, productDao.getAll().get(0));
     }
 
     @Test
-    void findById_alreadyContainingProductWithSpecifiedId_returnProductWithSpecifiedId() {
+    void find_alreadyContainingProductWithSpecifiedId_returnProductWithSpecifiedId() {
         setUp();
         Assertions.assertEquals(testProduct, productDao.find(1));
     }
 
     @Test
-    void removeById_alreadyContainingProductWithSpecifiedId_returnProductsWithoutOneWithSpecifiedId () {
+    void remove_alreadyContainingProductWithSpecifiedId_returnProductsWithoutOneWithSpecifiedId () {
         setUp();
         productDao.remove(2);
         Assertions.assertFalse(productDao.getAll().contains(testProduct2));
