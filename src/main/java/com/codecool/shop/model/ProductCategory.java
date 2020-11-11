@@ -33,4 +33,14 @@ public class ProductCategory extends BaseModel {
                 this.department,
                 this.description);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ProductCategory)) {
+            return false;
+        }
+
+        ProductCategory productCategory = (ProductCategory) obj;
+        return productCategory.getId() == this.getId() && productCategory.getDepartment().equals(this.getDepartment()) && productCategory.getName().equals(this.getName());
+    }
 }
