@@ -4,6 +4,7 @@ import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.jdbc.AccountDaoJdbc;
 import com.codecool.shop.dao.implementation.jdbc.ProductCategoryDaoJdbc;
 import com.codecool.shop.dao.implementation.jdbc.ProductDaoJdbc;
 import com.codecool.shop.dao.implementation.jdbc.SupplierDaoJdbc;
@@ -40,12 +41,15 @@ public class Initializer implements ServletContextListener {
         }
 
         DaoManager daoManager = DaoManager.getInstance();
+
         daoManager.setProductDao(new ProductDaoJdbc());
         daoManager.setProductCategoryDao(new ProductCategoryDaoJdbc());
         daoManager.setSupplierDao(new SupplierDaoJdbc());
 //        daoManager.setProductDao(new ProductDaoMem());
 //        daoManager.setProductCategoryDao(new ProductCategoryDaoMem());
 //        daoManager.setSupplierDao(new SupplierDaoMem());
+
+        daoManager.setAccountDao(new AccountDaoJdbc());
 
         ProductDao productDataStore = daoManager.getProductDao();
         ProductCategoryDao productCategoryDataStore = daoManager.getProductCategoryDao();

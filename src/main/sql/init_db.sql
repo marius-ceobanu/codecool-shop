@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS public.product;
 DROP TABLE IF EXISTS public.product_category;
 DROP TABLE IF EXISTS public.supplier;
+DROP TABLE IF EXISTS public.user_account;
 
 CREATE TABLE public.product_category (
     id serial NOT NULL,
@@ -34,4 +35,13 @@ CREATE TABLE public.product (
         REFERENCES public.supplier (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
+);
+
+CREATE TABLE public.user_account (
+    id bigserial NOT NULL,
+    name character varying(80) NOT NULL,
+    email character varying(80) NOT NULL,
+    password character varying(60) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE (email)
 );

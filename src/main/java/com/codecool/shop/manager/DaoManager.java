@@ -3,6 +3,7 @@ package com.codecool.shop.manager;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.AccountDao;
 
 public class DaoManager {
 
@@ -22,6 +23,8 @@ public class DaoManager {
     private ProductDao productDao;
     private ProductCategoryDao productCategoryDao;
     private SupplierDao supplierDao;
+
+    private AccountDao accountDao;
 
     public ProductDao getProductDao() {
         return productDao;
@@ -45,5 +48,13 @@ public class DaoManager {
 
     public void setSupplierDao(SupplierDao supplierDao) {
         this.supplierDao = supplierDao;
+    }
+
+    public AccountDao getAccountDao() {
+        return accountDao;
+    }
+
+    public void setAccountDao(AccountDao accountDao) {
+        this.accountDao = accountDao;
     }
 }

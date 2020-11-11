@@ -16,11 +16,10 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
 
+    private final CartDao cartDataStore = CartDaoMem.getInstance();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        CartDao cartDataStore = CartDaoMem.getInstance();
-
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("cart", cartDataStore.find(0)); // TODO Replace with actual userId

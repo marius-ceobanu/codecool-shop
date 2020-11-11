@@ -1,8 +1,10 @@
 package com.codecool.shop.manager;
 
+import com.codecool.shop.model.Account;
 import com.codecool.shop.model.Order;
 
 import javax.mail.*;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
@@ -57,7 +59,24 @@ public class MailManager {
 
             Transport.send(message);
         } catch (MessagingException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void sendWelcomeMail(Account account) {
+        try {
+            Message message = new MimeMessage(session);
+
+            message.setFrom(new InternetAddress(FROM_MAIL));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(account.getEmail()));
+            message.setSubject("Welcome to Codecoolshop!");
+
+            message.setText(String.format("Hello %s!%nWelcome to Codecoolshop tm, the only shop in the universe to sell the latest products* and guarantee delivery in the shortest time**.%nWe are happy to have you hare and good shopping!%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n*: The products may or may not be real and may or may not physically exist%n**: Shortest time possible could include never",
+                    account.getName()
+            ));
+
+            Transport.send(message);
+        } catch (MessagingException e) {
             e.printStackTrace();
         }
     }
