@@ -3,7 +3,7 @@ package com.codecool.shop.model;
 public class Supplier extends BaseModel {
 
     public Supplier(String name, String description) {
-        super(name);
+        super(name, description);
     }
 
     public Supplier(int id, String name, String description) {
@@ -19,5 +19,15 @@ public class Supplier extends BaseModel {
                 this.name,
                 this.description
         );
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Supplier)) {
+            return false;
+        }
+
+        Supplier supplier = (Supplier) obj;
+        return supplier.getId() == this.getId() && supplier.getDescription().equals(this.getDescription()) && supplier.getName().equals(this.getName());
     }
 }
