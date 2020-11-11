@@ -8,7 +8,14 @@ import java.util.List;
 
 public class SupplierDaoMem implements SupplierDao {
 
-    private final List<Supplier> data = new ArrayList<>();
+    private List<Supplier> data = new ArrayList<>();
+
+    public SupplierDaoMem() {
+    }
+
+    public SupplierDaoMem(List<Supplier> data) {
+        this.data = data;
+    }
 
     @Override
     public void add(Supplier supplier) {
