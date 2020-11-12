@@ -3,26 +3,55 @@ package com.codecool.shop.model;
 import java.util.Date;
 
 public class Order {
-    private Date orderStart;
-    private Date orderFinish;
+    private int id;
+    private Date date;
+    private int userId;
     private UserDetails userDetails;
     private Cart cart;
-    private Payment payment;
 
-    public Date getOrderStart() {
-        return orderStart;
+    public Order(int userId, UserDetails userDetails, Cart cart) {
+        this.userId = userId;
+        this.userDetails = userDetails;
+        this.cart = cart;
     }
 
-    public void setOrderStart(Date orderStart) {
-        this.orderStart = orderStart;
+    public Order(int id, Date date, int userId, UserDetails userDetails) {
+        this.id = id;
+        this.date = date;
+        this.userId = userId;
+        this.userDetails = userDetails;
     }
 
-    public Date getOrderFinish() {
-        return orderFinish;
+    public Order(int id, Date date, int userId, UserDetails userDetails, Cart cart) {
+        this.id = id;
+        this.date = date;
+        this.userId = userId;
+        this.userDetails = userDetails;
+        this.cart = cart;
     }
 
-    public void setOrderFinish(Date orderFinish) {
-        this.orderFinish = orderFinish;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public UserDetails getUserDetails() {
@@ -39,13 +68,5 @@ public class Order {
 
     public void setCart(Cart cart) {
         this.cart = cart;
-    }
-
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
     }
 }

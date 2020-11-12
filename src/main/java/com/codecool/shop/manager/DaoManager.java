@@ -1,10 +1,6 @@
 package com.codecool.shop.manager;
 
-import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.AccountDao;
+import com.codecool.shop.dao.*;
 
 public class DaoManager {
 
@@ -27,6 +23,7 @@ public class DaoManager {
 
     private AccountDao accountDao;
     private CartDao cartDao;
+    private OrderDao orderDao;
 
     public ProductDao getProductDao() {
         return productDao;
@@ -66,5 +63,13 @@ public class DaoManager {
 
     public void setCartDao(CartDao cartDao) {
         this.cartDao = cartDao;
+    }
+
+    public OrderDao getOrderDao() {
+        return orderDao;
+    }
+
+    public void setOrderDao(OrderDao orderDao) {
+        this.orderDao = orderDao;
     }
 }

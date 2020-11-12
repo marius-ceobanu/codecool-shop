@@ -1,7 +1,7 @@
 package com.codecool.shop.controller.account;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.implementation.AccountDao;
+import com.codecool.shop.dao.AccountDao;
 import com.codecool.shop.manager.DaoManager;
 import com.codecool.shop.manager.MailManager;
 import com.codecool.shop.model.Account;
@@ -42,8 +42,6 @@ public class RegisterController extends HttpServlet {
             accountDataStore.register(account);
 
             req.getSession().setAttribute("account", account);
-
-            System.out.printf("Registered: %d%n", ((Account) req.getSession().getAttribute("account")).getId());
 
             MailManager.getInstance().sendWelcomeMail(account);
 

@@ -1,6 +1,6 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
-import com.codecool.shop.dao.implementation.AccountDao;
+import com.codecool.shop.dao.AccountDao;
 import com.codecool.shop.manager.DatabaseManager;
 import com.codecool.shop.model.Account;
 

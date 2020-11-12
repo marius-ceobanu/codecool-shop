@@ -49,11 +49,11 @@ public class MailManager {
 
             message.setFrom(new InternetAddress(FROM_MAIL));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(order.getUserDetails().getEmail()));
-            message.setSubject("Order Confirmation");
+            message.setSubject(String.format("Order Confirmation #%d", order.getId()));
 
             message.setText(String.format("Hello %s!%n%nThank you for your order to Codecool Shop srl tm enterprises from %td-%<tm-%<tY %<tH:%<tM!%n%nYour order should arrive in about 1 to 97 years.",
                     order.getUserDetails().getFullName(),
-                    order.getOrderStart()
+                    order.getDate()
             ));
 
             Transport.send(message);

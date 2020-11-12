@@ -41,7 +41,7 @@ public class JsonManager {
             }
             String name = String.format("%s %td-%<tm-%<tY %<tH-%<tM-%<tS-%<tL",
                     order.getUserDetails().getFullName(),
-                    order.getOrderStart()
+                    order.getDate()
             );
             mapper.writeValue(new File(String.format("%s%s.json", SAVE_PATH, name)), order);
         } catch (IOException e) {

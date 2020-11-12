@@ -20,18 +20,24 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/checkout"})
 public class CheckoutController extends HttpServlet {
 
-    private final OrderDao orderDataStore = OrderDaoMem.getInstance();
+//    private final OrderDao orderDataStore = OrderDaoMem.getInstance();
     private final CartDao cartDataStore = DaoManager.getInstance().getCartDao();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
         Account account = (Account) req.getSession().getAttribute("account");
-        context.setVariable("cart", cartDataStore.find(account.getId()));
 
-        engine.process("checkout/index.html", context, resp.getWriter());
+        if (account != null) {
+            TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+            WebContext context = new WebContext(req, resp, req.getServletContext());
+
+            context.setVariable("cart", cartDataStore.find(account.getId()));
+
+            engine.process("checkout/index.html", context, resp.getWriter());
+        } else {
+            resp.sendRedirect("/account/register"); // TODO Change to login
+        }
     }
 
     @Override
@@ -49,11 +55,12 @@ public class CheckoutController extends HttpServlet {
         boolean sameAddress = context.getRequest().getParameter("sameadr").equals("checked");
 
         UserDetails userDetails = new UserDetails(fullName, mobile, email, address, city, county, zipCode, sameAddress, paymentMethod);
+        req.getSession().setAttribute("details", userDetails);
 
-        Account account = (Account) req.getSession().getAttribute("account");
+//        Account account = (Account) req.getSession().getAttribute("account");
 
-        orderDataStore.addUserDetails(account.getId(), userDetails);
-        orderDataStore.addCart(account.getId(), cartDataStore.find(account.getId()));
+//        orderDataStore.addUserDetails(account.getId(), userDetails);
+//        orderDataStore.addCart(account.getId(), cartDataStore.find(account.getId()));
 
         resp.sendRedirect("/checkout/payment");
     }

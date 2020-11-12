@@ -8,7 +8,6 @@ function refreshCartCount(cart) {
     }
 
     cartLabel.hidden = count === 0;
-
     cartLabel.innerText = count;
 }
 

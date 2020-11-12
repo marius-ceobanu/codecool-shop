@@ -1,15 +1,12 @@
 package com.codecool.shop.dao.implementation.memory;
 
-import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.OrderDao;
-import com.codecool.shop.manager.DaoManager;
-import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
-import com.codecool.shop.model.Payment;
-import com.codecool.shop.model.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderDaoMem implements OrderDao {
 
@@ -25,47 +22,65 @@ public class OrderDaoMem implements OrderDao {
     private OrderDaoMem() {
     }
 
-    private final HashMap<Integer, Order> orders = new HashMap<>();
-    private final CartDao cartDao = DaoManager.getInstance().getCartDao();
+    private final List<Order> data = new ArrayList<>();
 
     @Override
-    public Order getOrder(int userId) {
-        return orders.get(userId);
+    public Order get(int id) {
+        return data.stream().filter(order -> order.getId() == id).findFirst().orElse(null);
     }
 
     @Override
-    public void addCart(int userId, Cart cart) {
-        if (!orders.containsKey(userId)) {
-            orders.put(userId, new Order());
-            orders.get(userId).setOrderStart(new Date());
-        }
-
-        orders.get(userId).setCart(cart);
+    public void add(Order order) {
+        order.setId(data.size() + 1);
+        order.setDate(new Date());
+        data.add(order);
     }
 
     @Override
-    public void addUserDetails(int userId, UserDetails userDetails) {
-        if (!orders.containsKey(userId)) {
-            orders.put(userId, new Order());
-            orders.get(userId).setOrderStart(new Date());
-        }
-
-        orders.get(userId).setUserDetails(userDetails);
+    public List<Order> getByUser(int userId) {
+        return data.stream().filter(order -> order.getUserId() == userId).collect(Collectors.toList());
     }
 
-    @Override
-    public void addPayment(int userId, Payment payment) {
-        if (!orders.containsKey(userId)) {
-            orders.put(userId, new Order());
-            orders.get(userId).setOrderStart(new Date());
-        }
+    //    private final CartDao cartDao = DaoManager.getInstance().getCartDao();
 
-        orders.get(userId).setPayment(payment);
-    }
-
-    @Override
-    public void deleteOrder(int userId) {
-        cartDao.delete(userId);
-        orders.remove(userId);
-    }
+//    @Override
+//    public Order getOrder(int userId) {
+//        return orders.get(userId);
+//    }
+//
+//    @Override
+//    public void addCart(int userId, Cart cart) {
+//        if (!orders.containsKey(userId)) {
+//            orders.put(userId, new Order());
+//            orders.get(userId).setOrderStart(new Date());
+//        }
+//
+//        orders.get(userId).setCart(cart);
+//    }
+//
+//    @Override
+//    public void addUserDetails(int userId, UserDetails userDetails) {
+//        if (!orders.containsKey(userId)) {
+//            orders.put(userId, new Order());
+//            orders.get(userId).setOrderStart(new Date());
+//        }
+//
+//        orders.get(userId).setUserDetails(userDetails);
+//    }
+//
+//    @Override
+//    public void addPayment(int userId, Payment payment) {
+//        if (!orders.containsKey(userId)) {
+//            orders.put(userId, new Order());
+//            orders.get(userId).setOrderStart(new Date());
+//        }
+//
+//        orders.get(userId).setPayment(payment);
+//    }
+//
+//    @Override
+//    public void deleteOrder(int userId) {
+//        cartDao.delete(userId);
+//        orders.remove(userId);
+//    }
 }

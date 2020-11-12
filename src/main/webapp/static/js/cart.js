@@ -61,12 +61,10 @@ function refreshCartCount(cart) {
     }
 
     cartLabel.hidden = count === 0;
-
     cartLabel.innerText = count;
 }
 
 function refreshTotal(cart) {
-    console.log(cart);
     let price = 0;
 
     for (let item of cart.cartItems) {
