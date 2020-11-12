@@ -16,9 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet(urlPatterns = {"/account/register"})
 public class RegisterController extends HttpServlet {
+    Map<String, String> errors = new HashMap<>();
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final AccountDao accountDataStore = DaoManager.getInstance().getAccountDao();
@@ -27,11 +30,14 @@ public class RegisterController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+        context.setVariable("errors", errors);
         engine.process("account/register.html", context, resp.getWriter());
+        errors.clear();
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
@@ -47,7 +53,8 @@ public class RegisterController extends HttpServlet {
 
             resp.sendRedirect("/");
         } else {
-            // TODO
+            errors.put("email", "Email already registered!");
+            resp.sendRedirect("/account/register");
         }
     }
 }
