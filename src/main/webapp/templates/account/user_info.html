@@ -37,50 +37,40 @@
 </head>
 <body>
 
-<div th:replace="navbar.html :: copy"></div>
+<div th:replace="navbar.html :: copy"></div><br><br>
 
-<div class="container-xl pt-4 mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Register</div>
-                    <div class="card-body">
-                        <form name="my-form" onsubmit="validateForm()" action="/account/register" method="POST">
-                            <div class="form-group row">
-                                <label for="full_name" class="col-md-4 col-form-label text-md-right">Full Name</label>
-                                <div class="col-md-6">
-                                    <input type="text" id="full_name" class="form-control" name="name" required>
-                                </div>
-                            </div>
+<div class="container pl-4 mt-xl-5">
+    <form action="#" method="post">
 
-                            <div class="form-group row">
-                                <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
-                                <div class="col-md-6">
-                                    <input type="email" id="email_address" class="form-control" name="email" required>
-                                </div>
-                            </div>
+        <div class="row" th:object="${#session.getAttribute('account')}">
+            <div class="col-50">
+                <h3>User info</h3>
+                <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                <input type="text" id="fname" name="name" th:value="*{getName()}" required>
+                <label for="mobile"><i class="fa fa-phone"></i> Phone number</label>
+                <input type="tel" id="mobile" name="mobile" placeholder="0734568978" required pattern="[0-9]{4}[0-9]{3}[0-9]{3}">
+                <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                <input type="email" id="email" name="email" th:value="*{getEmail()}" required>
+                <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required>
+                <label for="city"><i class="fa fa-institution"></i> City</label>
+                <input type="text" id="city" name="city" placeholder="New York" required>
 
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                                <div class="col-md-6">
-                                    <input type="password" id="password" class="form-control" name="password" required>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </form>
-                        <div th:each="error : ${errors}">
-                            <div class="alert alert-danger" role="alert" th:text="${error.getValue()}"></div>
-                        </div>
+                <div class="row">
+                    <div class="col-50">
+                        <label for="county">County</label>
+                        <input type="text" id="county" name="county" placeholder="NY" required>
+                    </div>
+                    <div class="col-50">
+                        <label for="zip">Zip</label>
+                        <input type="text" id="zip" name="zip" placeholder="900083" required pattern="[0-9]*" maxlength="6">
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <input type="submit" value="Update User Info" class="btn">
+    </form>
 </div>
 
 <div th:replace="footer.html :: copy"></div>
