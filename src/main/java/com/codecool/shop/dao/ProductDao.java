@@ -2,8 +2,6 @@ package com.codecool.shop.dao;
 
 import com.codecool.shop.model.Product;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 public interface ProductDao {

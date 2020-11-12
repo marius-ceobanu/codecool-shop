@@ -2,8 +2,10 @@ package com.codecool.shop.controller.api;
 
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementation.memory.CartDaoMem;
+import com.codecool.shop.manager.CartManager;
 import com.codecool.shop.manager.DaoManager;
+import com.codecool.shop.model.Account;
+import com.codecool.shop.model.Cart;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
@@ -16,41 +18,46 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/api/cart/*"})
 public class CartApiServlet extends HttpServlet {
 
-    CartDao cartDataStore = CartDaoMem.getInstance();
-    ProductDao productDataStore = DaoManager.getInstance().getProductDao();
-    ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
+
+    private final CartDao cartDataStore = DaoManager.getInstance().getCartDao();
+    private final ProductDao productDataStore = DaoManager.getInstance().getProductDao();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         RequestData data = mapper.readValue(req.getReader(), RequestData.class);
 
-        try {
-            switch (req.getPathInfo()) {
-                case "/add":
-                    cartDataStore.add(
-                            0, // TODO Replace with actual userId
-                            productDataStore.find(data.getId()),
-                            data.getQuantity()
-                    );
-                    break;
-                case "/decrease":
-                    cartDataStore.removeCount(
-                            0, // TODO Replace with actual userId
-                            productDataStore.find(data.getId()),
-                            data.getQuantity()
-                    );
-                    break;
-                case "/remove":
-                    cartDataStore.remove(
-                            0, // TODO Replace with actual userId
-                            productDataStore.find(data.getId())
-                    );
-                    break;
+        Account account = (Account) req.getSession().getAttribute("account");
+
+        if (account != null) {
+            try {
+                switch (req.getPathInfo()) {
+                    case "/add":
+                        CartManager.addProduct(
+                                account.getId(),
+                                productDataStore.find(data.getId()),
+                                data.getQuantity()
+                        );
+                        break;
+                    case "/decrease":
+                        CartManager.decreaseQuantity(
+                                account.getId(),
+                                productDataStore.find(data.getId()),
+                                data.getQuantity()
+                        );
+                        break;
+                    case "/remove":
+                        CartManager.removeProduct(
+                                account.getId(),
+                                productDataStore.find(data.getId())
+                        );
+                        break;
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
         }
 
     }
@@ -59,7 +66,13 @@ public class CartApiServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().print(mapper.writeValueAsString(cartDataStore.find(0))); // TODO Replace with actual userId
+
+        Account account = (Account) req.getSession().getAttribute("account");
+
+        if (account != null) {
+            Cart cart = cartDataStore.find(account.getId());
+            resp.getWriter().print(mapper.writeValueAsString(cart));
+        }
         resp.getWriter().flush();
     }
 

@@ -89,17 +89,17 @@
           <b th:text="${cart.productCount()}">0</b>
         </span>
             </h4>
-            <div th:each="product : ${cart}">
+            <div th:each="item : ${cart.cartItems}">
                 <p class="font-weight-light">
-                    <a href="#" th:text="${product.getKey().getName()}">Product 1</a>
+                    <a href="#" th:text="${item.product.name}">Product 1</a>
                     <span class="mx-0">x</span>
-                    <span th:text="${product.getValue()}"></span>
-                    <span class="price text-success">$<span th:text="${product.getKey().getDefaultPrice()}"></span></span>
+                    <span th:text="${item.quantity}"></span>
+                    <span class="price text-success"><span th:text="${item.product.price}"></span></span>
                 </p>
             </div>
             <br>
             <hr>
-            <p>Total <span class="price" style="color:black"><b class="price" th:text="${cart.totalPrice()}">$30</b><b>$</b></span></p>
+            <p>Total <span class="price" style="color:black"><b>$</b><b class="price" th:text="${cart.totalPrice()}">$30</b></span></p>
         </div>
     </div>
 </div>

@@ -10,10 +10,19 @@ import java.util.stream.Collectors;
 
 public class ProductDaoMem implements ProductDao {
 
-    private List<Product> data = new ArrayList<>();
+    private static ProductDaoMem instance = null;
 
-    public ProductDaoMem() {
+    public static ProductDaoMem getInstance() {
+        if (instance == null) {
+            instance = new ProductDaoMem();
+        }
+        return instance;
     }
+
+    private ProductDaoMem() {
+    }
+
+    private List<Product> data = new ArrayList<>();
 
     public ProductDaoMem(List<Product> data) {
         this.data = data;

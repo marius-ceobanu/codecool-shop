@@ -3,10 +3,11 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.OrderDao;
-import com.codecool.shop.dao.implementation.memory.CartDaoMem;
 import com.codecool.shop.dao.implementation.memory.OrderDaoMem;
+import com.codecool.shop.manager.DaoManager;
 import com.codecool.shop.manager.JsonManager;
 import com.codecool.shop.manager.MailManager;
+import com.codecool.shop.model.Account;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Payment;
 import org.thymeleaf.TemplateEngine;
@@ -21,13 +22,16 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/checkout/payment"})
 public class PaymentController extends HttpServlet {
-    private final CartDao cartDataStore = CartDaoMem.getInstance();
+    private final CartDao cartDataStore = DaoManager.getInstance().getCartDao();
     private final OrderDao orderDao = OrderDaoMem.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        Order order = orderDao.getOrder(0); // TODO Replace with actual userId
+
+        Account account = (Account) req.getSession().getAttribute("account");
+
+        Order order = orderDao.getOrder(account.getId());
         if(order.getUserDetails().getPaymentMethod().equals("card")) {
             Payment payment = new Payment(
                 context.getRequest().getParameter("cardname"),
@@ -47,12 +51,19 @@ public class PaymentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Order order = orderDao.getOrder(0); // TODO Replace with actual userId
+        Account account = (Account) req.getSession().getAttribute("account");
 
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("cart", cartDataStore.find(0)); // TODO Replace with actual userId
-        context.setVariable("method", order.getUserDetails().getPaymentMethod());
-        engine.process("payment/index.html", context, resp.getWriter());
+        if (account != null) {
+            Order order = orderDao.getOrder(account.getId());
+
+            TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+            WebContext context = new WebContext(req, resp, req.getServletContext());
+
+            context.setVariable("cart", cartDataStore.find(account.getId()));
+            context.setVariable("method", order.getUserDetails().getPaymentMethod());
+            engine.process("payment/index.html", context, resp.getWriter());
+        } else {
+            resp.sendRedirect("/account/register"); // TODO Change to login
+        }
     }
 }

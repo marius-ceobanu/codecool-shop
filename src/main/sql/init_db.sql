@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS public.product;
 DROP TABLE IF EXISTS public.product_category;
 DROP TABLE IF EXISTS public.supplier;
+DROP TABLE IF EXISTS public.cart;
 DROP TABLE IF EXISTS public.user_account;
 
 CREATE TABLE public.product_category (
@@ -44,4 +45,19 @@ CREATE TABLE public.user_account (
     password character varying(60) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (email)
+);
+
+CREATE TABLE public.cart (
+    user_id integer NOT NULL,
+    product_id integer NOT NULL,
+    quantity integer NOT NULL,
+    PRIMARY KEY (user_id, product_id),
+    FOREIGN KEY (user_id)
+        REFERENCES public.user_account (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (product_id)
+        REFERENCES public.product (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );

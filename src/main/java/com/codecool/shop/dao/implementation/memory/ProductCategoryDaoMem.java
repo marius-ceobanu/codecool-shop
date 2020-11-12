@@ -9,10 +9,19 @@ import java.util.List;
 
 public class ProductCategoryDaoMem implements ProductCategoryDao {
 
-    private List<ProductCategory> data = new ArrayList<>();
+    private static ProductCategoryDaoMem instance = null;
 
-    public ProductCategoryDaoMem() {
+    public static ProductCategoryDaoMem getInstance() {
+        if (instance == null) {
+            instance = new ProductCategoryDaoMem();
+        }
+        return instance;
     }
+
+    private ProductCategoryDaoMem() {
+    }
+
+    private List<ProductCategory> data = new ArrayList<>();
 
     public ProductCategoryDaoMem(List<ProductCategory> data) {
         this.data = data;

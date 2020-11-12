@@ -19,7 +19,7 @@ public class ProductCategoryDaoJdbcTest {
 
     @BeforeEach
     protected void setUp() {
-        productCategoryDao = new ProductCategoryDaoJdbc();
+        productCategoryDao = ProductCategoryDaoJdbc.getInstance();
         DatabaseManager.setProperties("connection_test_db.properties");
         try (Connection connection = DatabaseManager.connect()) {
             ScriptRunner sr = new ScriptRunner(connection);

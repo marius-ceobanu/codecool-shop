@@ -4,19 +4,10 @@ import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.jdbc.AccountDaoJdbc;
-import com.codecool.shop.dao.implementation.jdbc.ProductCategoryDaoJdbc;
-import com.codecool.shop.dao.implementation.jdbc.ProductDaoJdbc;
-import com.codecool.shop.dao.implementation.jdbc.SupplierDaoJdbc;
-import com.codecool.shop.dao.implementation.memory.CartDaoMem;
-import com.codecool.shop.dao.implementation.memory.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.memory.ProductDaoMem;
-import com.codecool.shop.dao.implementation.memory.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.jdbc.*;
+import com.codecool.shop.dao.implementation.memory.*;
 import com.codecool.shop.manager.DaoManager;
 import com.codecool.shop.manager.DatabaseManager;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -34,7 +25,6 @@ public class Initializer implements ServletContextListener {
 
         try {
             DatabaseManager.connect().close();
-
             System.out.println("connection ok");
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -42,20 +32,23 @@ public class Initializer implements ServletContextListener {
 
         DaoManager daoManager = DaoManager.getInstance();
 
-        daoManager.setProductDao(new ProductDaoJdbc());
-        daoManager.setProductCategoryDao(new ProductCategoryDaoJdbc());
-        daoManager.setSupplierDao(new SupplierDaoJdbc());
-//        daoManager.setProductDao(new ProductDaoMem());
-//        daoManager.setProductCategoryDao(new ProductCategoryDaoMem());
-//        daoManager.setSupplierDao(new SupplierDaoMem());
+        daoManager.setProductDao(ProductDaoJdbc.getInstance());
+        daoManager.setProductCategoryDao(ProductCategoryDaoJdbc.getInstance());
+        daoManager.setSupplierDao(SupplierDaoJdbc.getInstance());
+        daoManager.setCartDao(CartDaoJdbc.getInstance());
 
-        daoManager.setAccountDao(new AccountDaoJdbc());
+//        daoManager.setProductDao(ProductDaoMem.getInstance());
+//        daoManager.setProductCategoryDao(ProductCategoryDaoMem.getInstance());
+//        daoManager.setSupplierDao(SupplierDaoMem.getInstance());
+//        daoManager.setCartDao(CartDaoMem.getInstance());
+
+        daoManager.setAccountDao(AccountDaoJdbc.getInstance());
 
         ProductDao productDataStore = daoManager.getProductDao();
         ProductCategoryDao productCategoryDataStore = daoManager.getProductCategoryDao();
         SupplierDao supplierDataStore = daoManager.getSupplierDao();
 
-        CartDao cartDataStore = CartDaoMem.getInstance();
+        CartDao cartDataStore = daoManager.getCartDao();
 
 //        //setting up a new supplier
 //        Supplier amazon = new Supplier("Amazon", "Digital content and services");

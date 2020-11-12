@@ -15,7 +15,7 @@ class ProductDaoMemTest {
     private final List<Product> testData = new ArrayList<>();
 
     protected void setUpEmpty() {
-        productDao = new ProductDaoMem(); // Modify DAO instance
+        productDao = ProductDaoMem.getInstance(); // Modify DAO instance
     }
 
     protected void setUp() {

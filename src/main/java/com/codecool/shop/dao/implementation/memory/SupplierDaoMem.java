@@ -8,10 +8,19 @@ import java.util.List;
 
 public class SupplierDaoMem implements SupplierDao {
 
-    private List<Supplier> data = new ArrayList<>();
+    private static SupplierDaoMem instance = null;
 
-    public SupplierDaoMem() {
+    public static SupplierDaoMem getInstance() {
+        if (instance == null) {
+            instance = new SupplierDaoMem();
+        }
+        return instance;
     }
+
+    private SupplierDaoMem() {
+    }
+
+    private List<Supplier> data = new ArrayList<>();
 
     public SupplierDaoMem(List<Supplier> data) {
         this.data = data;

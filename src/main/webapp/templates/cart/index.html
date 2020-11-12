@@ -45,12 +45,12 @@
                     <span class="ml-4">Quantity</span>
                 </li>
                 <div id="product-container">
-                    <li class="list-group-item d-flex align-items-center" th:each="product : ${cart}" th:attr="data-id=${product.key.id}">
-                        <span><img th:attr="src='/static/img/product_' + ${product.key.id} + '.jpg'" height="50px"></span>
-                        <span class="mr-auto" th:text="${product.getKey().getName()}"></span>
-                        <span class="mr-1" th:text="${product.getKey().getPrice()}"></span>
+                    <li class="list-group-item d-flex align-items-center" th:each="item : ${cart.getCartItems()}" th:attr="data-id=${item.product.id}">
+                        <span><img th:attr="src='/static/img/product_' + ${item.product.id} + '.jpg'" height="50px"></span>
+                        <span class="mr-auto" th:text="${item.product.name}"></span>
+                        <span class="mr-1" th:text="${item.product.getPrice()}"></span>
                         <span class="mx-3">x</span>
-                        <span th:text="${product.getValue()}"></span>
+                        <span th:text="${item.quantity}"></span>
                         <span class="mx-1">
                             <div class="btn-group-vertical btn-group-sm my-n3" role="group" aria-label="Quantity">
                                 <button type="button" class="btn btn-secondary p-0 add-btn">+</button>

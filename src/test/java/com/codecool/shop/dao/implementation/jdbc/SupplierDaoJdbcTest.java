@@ -19,7 +19,7 @@ public class SupplierDaoJdbcTest {
 
     @BeforeEach
     protected void setUp() {
-        supplierDao = new SupplierDaoJdbc();
+        supplierDao = SupplierDaoJdbc.getInstance();
         DatabaseManager.setProperties("connection_test_db.properties");
         try (Connection connection = DatabaseManager.connect()) {
             ScriptRunner sr = new ScriptRunner(connection);

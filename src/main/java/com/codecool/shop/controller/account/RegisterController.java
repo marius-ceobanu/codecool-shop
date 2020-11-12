@@ -43,6 +43,8 @@ public class RegisterController extends HttpServlet {
 
             req.getSession().setAttribute("account", account);
 
+            System.out.printf("Registered: %d%n", ((Account) req.getSession().getAttribute("account")).getId());
+
             MailManager.getInstance().sendWelcomeMail(account);
 
             resp.sendRedirect("/");

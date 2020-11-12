@@ -1,22 +1,77 @@
 package com.codecool.shop.model;
 
-import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
-public class Cart extends HashMap<Product, Integer> {
+public class Cart {
+    private int userId;
+    private List<CartItem> cartItems = new ArrayList<>();
+
+    public Cart(int userId) {
+        this.userId = userId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+
+    public void addProduct(Product product, int quantity) {
+        for (CartItem item : cartItems) {
+            if (item.getProduct().equals(product)) {
+                item.setQuantity(item.getQuantity() + quantity);
+                return;
+            }
+        }
+
+        cartItems.add(new CartItem(product, quantity));
+    }
+
+    public void decreaseQuantity(Product product, int quantity) {
+        for (CartItem item : cartItems) {
+            if (item.getProduct().equals(product)) {
+                item.setQuantity(item.getQuantity() - quantity);
+                if (item.getQuantity() <= 0) {
+                    cartItems.remove(item);
+                }
+                return;
+            }
+        }
+    }
+
+    public void removeProduct(Product product) {
+        for (CartItem item : cartItems) {
+            if (item.getProduct().equals(product)) {
+                cartItems.remove(item);
+                return;
+            }
+        }
+    }
 
     public int productCount() {
-        AtomicInteger count = new AtomicInteger();
-        this.forEach(((product, quantity) -> count.addAndGet(quantity)));
-        return count.get();
+        return cartItems.stream().mapToInt(CartItem::getQuantity).sum();
     }
 
     public float totalPrice() {
-        var lambdaContext = new Object() {
-            float count = 0;
-        };
-        this.forEach(((product, quantity) -> lambdaContext.count += (product.getDefaultPrice() * quantity)));
-//        return lambdaContext.count;
-        return (float)((int)(lambdaContext.count)) + (float)((int)(lambdaContext.count * 100) % 100) / 100; // Floating points for the f-ing win
+        AtomicReference<Float> total = new AtomicReference<>(0f);
+
+        cartItems.forEach(item ->
+            total.updateAndGet(v -> v + item.getProduct().getDefaultPrice() * item.getQuantity())
+        );
+
+        float x = total.get();
+        return (float)((int)x) + (float)((int)(x * 100) % 100) / 100; // Floating points for the f-ing win
     }
 }

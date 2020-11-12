@@ -11,6 +11,18 @@ import java.util.List;
 
 public class ProductCategoryDaoJdbc implements ProductCategoryDao {
 
+    private static ProductCategoryDaoJdbc instance = null;
+
+    public static ProductCategoryDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new ProductCategoryDaoJdbc();
+        }
+        return instance;
+    }
+
+    private ProductCategoryDaoJdbc() {
+    }
+
     @Override
     public void add(ProductCategory category) {
         try (Connection connection = DatabaseManager.connect()) {

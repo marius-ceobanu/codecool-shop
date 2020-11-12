@@ -21,55 +21,43 @@ function getValue(string, field) {
     return sub.substring(0, end < 0 ? sub.length : end);
 }
 
-function refreshProduct(product, productData, count) {
-    product.children[1].innerText = getValue(productData, "name");
-
-    let price = getValue(productData, "defaultPrice");
-    price = price.substring(0, price.indexOf('.') + 2);
-    product.children[2].innerText = price + " " + getValue(productData, "defaultCurrency");
-
-    product.children[4].innerText = count;
+function refreshProduct(product, productData, quantity) {
+    product.children[1].innerText = productData.name;
+    product.children[2].innerText = productData.price;
+    product.children[4].innerText = quantity;
 }
 
-function refreshCart(data) {
+function refreshCart(cart) {
     let children = productContainer.children;
+
     for (let i = 0; i < children.length; i++) {
-        let id = children[i].dataset["id"];
+        let id = parseInt(children[i].dataset["id"]);
 
-        let productData;
-        let count;
+        let found = false;
 
-        for (let k in data) {
-            if (data.hasOwnProperty(k)) {
-                if (getValue(k, "id") === id) {
-                    productData = k;
-                    count = data[k];
-                    break;
-                }
+        for (let item of cart.cartItems) {
+            if (item.product.id === id) {
+                refreshProduct(children[i], item.product, item.quantity);
+                found = true;
             }
         }
 
-        if (productData != null) {
-            refreshProduct(children[i], productData, count);
-        } else {
-            productContainer.removeChild(children[i]);
-            i--;
+        if (!found) {
+            productContainer.removeChild(children[i--]);
         }
     }
 
     checkoutBtn.disabled = children.length === 0;
 
-    refreshCartCount(data);
-    refreshTotal(data);
+    refreshCartCount(cart);
+    refreshTotal(cart);
 }
 
 function refreshCartCount(cart) {
     let count = 0;
 
-    for (let k in cart) {
-        if (cart.hasOwnProperty(k)) {
-            count += cart[k];
-        }
+    for (let item of cart.cartItems) {
+        count += item.quantity;
     }
 
     cartLabel.hidden = count === 0;
@@ -78,19 +66,16 @@ function refreshCartCount(cart) {
 }
 
 function refreshTotal(cart) {
+    console.log(cart);
     let price = 0;
 
-    for (let k in cart) {
-        if (cart.hasOwnProperty(k)) {
-            console.log(getValue(k, "defaultPrice"));
-            price += parseFloat(getValue(k, "defaultPrice")) * cart[k];
-        }
+    for (let item of cart.cartItems) {
+        price += item.product.defaultPrice * item.quantity;
     }
 
     price = Math.round((price + Number.EPSILON) * 100) / 100;
     cartPrice.innerText = price;
     cartTotal.innerText = price;
-    // console.log("refreshed")
 }
 
 function updateCart() {

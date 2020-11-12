@@ -15,7 +15,7 @@ public class SupplierDaoMemTest {
     private final List<Supplier> testData = new ArrayList<>();
 
     protected void setUpEmpty() {
-        supplierDao = new SupplierDaoMem(); // Modify DAO instance
+        supplierDao = SupplierDaoMem.getInstance(); // Modify DAO instance
     }
 
     protected void setUp() {

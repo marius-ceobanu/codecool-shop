@@ -3,8 +3,9 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.OrderDao;
-import com.codecool.shop.dao.implementation.memory.CartDaoMem;
 import com.codecool.shop.dao.implementation.memory.OrderDaoMem;
+import com.codecool.shop.manager.DaoManager;
+import com.codecool.shop.model.Account;
 import com.codecool.shop.model.UserDetails;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -19,16 +20,16 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/checkout"})
 public class CheckoutController extends HttpServlet {
 
-    private final OrderDao orderDao = OrderDaoMem.getInstance();
-    private final CartDao cartDao = CartDaoMem.getInstance();
+    private final OrderDao orderDataStore = OrderDaoMem.getInstance();
+    private final CartDao cartDataStore = DaoManager.getInstance().getCartDao();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CartDao cartDataStore = CartDaoMem.getInstance();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("cart", cartDataStore.find(0)); // TODO Replace with actual userId
+        Account account = (Account) req.getSession().getAttribute("account");
+        context.setVariable("cart", cartDataStore.find(account.getId()));
 
         engine.process("checkout/index.html", context, resp.getWriter());
     }
@@ -49,8 +50,10 @@ public class CheckoutController extends HttpServlet {
 
         UserDetails userDetails = new UserDetails(fullName, mobile, email, address, city, county, zipCode, sameAddress, paymentMethod);
 
-        orderDao.addUserDetails(0, userDetails); // TODO Replace with actual userId
-        orderDao.addCart(0, cartDao.find(0)); // TODO Replace with actual userId
+        Account account = (Account) req.getSession().getAttribute("account");
+
+        orderDataStore.addUserDetails(account.getId(), userDetails);
+        orderDataStore.addCart(account.getId(), cartDataStore.find(account.getId()));
 
         resp.sendRedirect("/checkout/payment");
     }

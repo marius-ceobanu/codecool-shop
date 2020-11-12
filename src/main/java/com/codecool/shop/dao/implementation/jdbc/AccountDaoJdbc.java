@@ -9,6 +9,18 @@ import java.sql.*;
 
 public class AccountDaoJdbc implements AccountDao {
 
+    private static AccountDaoJdbc instance = null;
+
+    public static AccountDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new AccountDaoJdbc();
+        }
+        return instance;
+    }
+
+    private AccountDaoJdbc() {
+    }
+
     @Override
     public void register(Account account) {
         try (Connection connection = DatabaseManager.connect()) {
