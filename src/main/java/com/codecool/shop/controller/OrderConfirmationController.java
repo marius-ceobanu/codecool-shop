@@ -39,7 +39,7 @@ public class OrderConfirmationController extends HttpServlet {
 
             engine.process("order_confirmation/index.html", context, resp.getWriter());
         } else {
-            resp.sendRedirect("/account/register"); // TODO Change to login
+            resp.sendRedirect("/account/register");
         }
     }
 }

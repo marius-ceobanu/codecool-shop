@@ -20,7 +20,6 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/checkout"})
 public class CheckoutController extends HttpServlet {
 
-//    private final OrderDao orderDataStore = OrderDaoMem.getInstance();
     private final CartDao cartDataStore = DaoManager.getInstance().getCartDao();
 
     @Override
@@ -36,7 +35,7 @@ public class CheckoutController extends HttpServlet {
 
             engine.process("checkout/index.html", context, resp.getWriter());
         } else {
-            resp.sendRedirect("/account/register"); // TODO Change to login
+            resp.sendRedirect("/account/register");
         }
     }
 
@@ -56,11 +55,6 @@ public class CheckoutController extends HttpServlet {
 
         UserDetails userDetails = new UserDetails(fullName, mobile, email, address, city, county, zipCode, sameAddress, paymentMethod);
         req.getSession().setAttribute("details", userDetails);
-
-//        Account account = (Account) req.getSession().getAttribute("account");
-
-//        orderDataStore.addUserDetails(account.getId(), userDetails);
-//        orderDataStore.addCart(account.getId(), cartDataStore.find(account.getId()));
 
         resp.sendRedirect("/checkout/payment");
     }

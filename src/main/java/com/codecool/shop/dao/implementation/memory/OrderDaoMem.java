@@ -40,47 +40,4 @@ public class OrderDaoMem implements OrderDao {
     public List<Order> getByUser(int userId) {
         return data.stream().filter(order -> order.getUserId() == userId).collect(Collectors.toList());
     }
-
-    //    private final CartDao cartDao = DaoManager.getInstance().getCartDao();
-
-//    @Override
-//    public Order getOrder(int userId) {
-//        return orders.get(userId);
-//    }
-//
-//    @Override
-//    public void addCart(int userId, Cart cart) {
-//        if (!orders.containsKey(userId)) {
-//            orders.put(userId, new Order());
-//            orders.get(userId).setOrderStart(new Date());
-//        }
-//
-//        orders.get(userId).setCart(cart);
-//    }
-//
-//    @Override
-//    public void addUserDetails(int userId, UserDetails userDetails) {
-//        if (!orders.containsKey(userId)) {
-//            orders.put(userId, new Order());
-//            orders.get(userId).setOrderStart(new Date());
-//        }
-//
-//        orders.get(userId).setUserDetails(userDetails);
-//    }
-//
-//    @Override
-//    public void addPayment(int userId, Payment payment) {
-//        if (!orders.containsKey(userId)) {
-//            orders.put(userId, new Order());
-//            orders.get(userId).setOrderStart(new Date());
-//        }
-//
-//        orders.get(userId).setPayment(payment);
-//    }
-//
-//    @Override
-//    public void deleteOrder(int userId) {
-//        cartDao.delete(userId);
-//        orders.remove(userId);
-//    }
 }

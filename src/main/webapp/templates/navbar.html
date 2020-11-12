@@ -11,10 +11,19 @@
         </a>
 
         <span class="navbar-text ml-auto cart-container">
-            <a href="/account/register" class="mx-2 text-decoration-none">Register</a>
-            <a href="" class="mx-2 text-decoration-none" data-toggle="modal" data-target="#myModal">Login</a>
-            <a href="/account/user" class="mx-2 text-decoration-none" th:text="${session.account}"></a>
-            <a href="/account/logout" class="mx-2 text-decoration-none">Logout</a>
+
+            <span th:switch="${session.account==null}">
+                <span th:case="${true}">
+                    <a href="/account/register" class="mx-2 text-decoration-none">Register</a>
+                    <a href="" class="mx-2 text-decoration-none" data-toggle="modal" data-target="#myModal">Login</a>
+                </span>
+
+                <span th:case="*">
+                    <a href="/account/user" class="mx-2 text-decoration-none" th:text="${session.account.name}"></a>
+                    <a href="/account/logout" class="mx-2 text-decoration-none">Logout</a>
+                </span>
+            </span>
+
             <a href="/cart" class="text-decoration-none"><i class="fa" style="font-size:24px">&#xf07a;</i><span class="badge badge-warning" id="lblCartCount" hidden>0</span></a>
         </span>
     </nav>

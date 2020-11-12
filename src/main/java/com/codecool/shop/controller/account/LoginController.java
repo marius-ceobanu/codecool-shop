@@ -1,6 +1,6 @@
 package com.codecool.shop.controller.account;
 
-import com.codecool.shop.dao.implementation.AccountDao;
+import com.codecool.shop.dao.AccountDao;
 import com.codecool.shop.manager.DaoManager;
 import com.codecool.shop.model.Account;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

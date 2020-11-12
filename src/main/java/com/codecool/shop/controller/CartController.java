@@ -31,7 +31,7 @@ public class CartController extends HttpServlet {
             context.setVariable("cart", cart);
             engine.process("cart/index.html", context, resp.getWriter());
         } else {
-            resp.sendRedirect("/account/register"); // TODO Change to login
+            resp.sendRedirect("/account/register");
         }
     }
 }

@@ -27,7 +27,6 @@ public class MailManager {
     private final Session session;
 
     MailManager() {
-//        Properties properties = System.getProperties();
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", true);
         properties.put("mail.smtp.starttls.enable", "true");

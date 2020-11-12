@@ -1,6 +1,7 @@
 package com.codecool.shop.controller.account;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.model.Account;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -16,9 +17,15 @@ public class UserInfoController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        engine.process("account/user_info.html", context, resp.getWriter());
+        Account account = (Account) req.getSession().getAttribute("account");
+
+        if (account != null) {
+            TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+            WebContext context = new WebContext(req, resp, req.getServletContext());
+            engine.process("account/user_info.html", context, resp.getWriter());
+        } else {
+            resp.sendRedirect("/account/register");
+        }
     }
 
     @Override

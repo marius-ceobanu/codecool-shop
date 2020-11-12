@@ -42,7 +42,7 @@ public class PaymentController extends HttpServlet {
             context.setVariable("method", details.getPaymentMethod());
             engine.process("payment/index.html", context, resp.getWriter());
         } else {
-            resp.sendRedirect("/account/register"); // TODO Change to login
+            resp.sendRedirect("/account/register");
         }
     }
 
