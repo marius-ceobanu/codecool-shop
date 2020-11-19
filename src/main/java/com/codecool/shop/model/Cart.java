@@ -74,4 +74,16 @@ public class Cart {
         float x = total.get();
         return (float)((int)x) + (float)((int)(x * 100) % 100) / 100; // Floating points for the f-ing win
     }
+
+    @Override
+    public String toString() {
+        StringBuilder products = new StringBuilder();
+        for(CartItem cartItem : cartItems) {
+            products.append(cartItem.getProduct().getName())
+                    .append(" X ")
+                    .append(cartItem.getQuantity())
+                    .append(", ");
+        }
+        return products.substring(0, products.length()-2);
+    }
 }

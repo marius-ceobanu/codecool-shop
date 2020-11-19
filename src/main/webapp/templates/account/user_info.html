@@ -72,6 +72,30 @@
     </form>
 </div>
 
+<!-- Order History-->
+<div class="container pl-4 mt-xl-5">
+    <span class="badge badge-success">Order History</span>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Order Id</th>
+            <th scope="col">Date</th>
+            <th scope="col">Ordered Items</th>
+            <th scope="col">Total</th>
+        </tr>
+        </thead>
+        <tbody th:each="order : ${orders}">
+        <tr>
+            <th scope="row" th:text="${order.getId()}"></th>
+            <td th:text="${order.getDate()}"></td>
+            <td th:text="${order.getCart().toString()}"></td>
+            <td scope="row">$<span th:text="${order.getCart().totalPrice()}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 <div th:replace="footer.html :: copy"></div>
 
 </body>
