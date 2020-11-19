@@ -1,11 +1,12 @@
 package com.codecool.shop.config;
 
-import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.dao.ProductCategoryDao;
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.jdbc.*;
-import com.codecool.shop.dao.implementation.memory.*;
 import com.codecool.shop.manager.DaoManager;
 import com.codecool.shop.manager.DatabaseManager;
-import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -38,6 +39,7 @@ public class Initializer implements ServletContextListener {
         daoManager.setSupplierDao(SupplierDaoJdbc.getInstance());
         daoManager.setCartDao(CartDaoJdbc.getInstance());
         daoManager.setOrderDao(OrderDaoJdbc.getInstance());
+        daoManager.setUserDetailsDao(UserDetailsDaoJdbc.getInstance());
 
 //        daoManager.setProductDao(ProductDaoMem.getInstance());
 //        daoManager.setProductCategoryDao(ProductCategoryDaoMem.getInstance());

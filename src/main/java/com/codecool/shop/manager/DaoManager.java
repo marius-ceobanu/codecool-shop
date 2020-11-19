@@ -24,6 +24,15 @@ public class DaoManager {
     private AccountDao accountDao;
     private CartDao cartDao;
     private OrderDao orderDao;
+    private UserDetailsDao userDetailsDao;
+
+    public UserDetailsDao getUserDetailsDao() {
+        return userDetailsDao;
+    }
+
+    public void setUserDetailsDao(UserDetailsDao userDetailsDao) {
+        this.userDetailsDao = userDetailsDao;
+    }
 
     public ProductDao getProductDao() {
         return productDao;

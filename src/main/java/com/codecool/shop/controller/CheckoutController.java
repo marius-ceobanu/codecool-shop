@@ -2,8 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.OrderDao;
-import com.codecool.shop.dao.implementation.memory.OrderDaoMem;
+import com.codecool.shop.dao.UserDetailsDao;
 import com.codecool.shop.manager.DaoManager;
 import com.codecool.shop.model.Account;
 import com.codecool.shop.model.UserDetails;
@@ -21,6 +20,7 @@ import java.io.IOException;
 public class CheckoutController extends HttpServlet {
 
     private final CartDao cartDataStore = DaoManager.getInstance().getCartDao();
+    private final UserDetailsDao userDetailsDao = DaoManager.getInstance().getUserDetailsDao();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,7 +30,9 @@ public class CheckoutController extends HttpServlet {
         if (account != null) {
             TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
             WebContext context = new WebContext(req, resp, req.getServletContext());
+            UserDetails userDetails = userDetailsDao.getById(account.getId());
 
+            context.setVariable("userDetails", userDetails);
             context.setVariable("cart", cartDataStore.find(account.getId()));
 
             engine.process("checkout/index.html", context, resp.getWriter());

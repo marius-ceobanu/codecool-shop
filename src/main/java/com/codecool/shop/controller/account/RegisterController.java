@@ -2,9 +2,11 @@ package com.codecool.shop.controller.account;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.AccountDao;
+import com.codecool.shop.dao.UserDetailsDao;
 import com.codecool.shop.manager.DaoManager;
 import com.codecool.shop.manager.MailManager;
 import com.codecool.shop.model.Account;
+import com.codecool.shop.model.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.thymeleaf.TemplateEngine;
@@ -25,6 +27,7 @@ public class RegisterController extends HttpServlet {
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final AccountDao accountDataStore = DaoManager.getInstance().getAccountDao();
+    private final UserDetailsDao userDetailsDao = DaoManager.getInstance().getUserDetailsDao();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,7 +48,9 @@ public class RegisterController extends HttpServlet {
         if (accountDataStore.getByEmail(email) == null) {
             String encodedPassword = passwordEncoder.encode(password);
             Account account = new Account(name, email, encodedPassword);
-            accountDataStore.register(account);
+            UserDetails userDetails = new UserDetails(name, "", email, "", "", "", "", false, "");
+            int id = accountDataStore.register(account);
+            userDetailsDao.add(id, userDetails);
 
             req.getSession().setAttribute("account", account);
 

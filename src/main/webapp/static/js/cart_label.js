@@ -1,4 +1,4 @@
-import { dataHandler } from "./data_handler.js";
+import {dataHandler} from "./data_handler.js";
 
 function refreshCartCount(cart) {
     let count = 0;

@@ -22,7 +22,7 @@ public class AccountDaoJdbc implements AccountDao {
     }
 
     @Override
-    public void register(Account account) {
+    public int register(Account account) {
         try (Connection connection = DatabaseManager.connect()) {
             PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO public.user_account (name, email, password) VALUES (?, ?, ?)",
@@ -39,10 +39,12 @@ public class AccountDaoJdbc implements AccountDao {
 
             if (resultSet.next()) {
                 account.setId(resultSet.getInt("id"));
+                return resultSet.getInt("id");
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     @Override

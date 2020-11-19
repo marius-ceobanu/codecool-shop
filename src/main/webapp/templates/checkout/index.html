@@ -46,24 +46,24 @@
                     <div class="col-50">
                         <h3>Shipping Address</h3>
                         <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-                        <input type="text" id="fname" name="name" placeholder="John M. Doe" required>
+                        <input type="text" id="fname" name="name" placeholder="John M. Doe" required th:value="${userDetails.getFullName()}">
                         <label for="mobile"><i class="fa fa-phone"></i> Phone number</label>
-                        <input type="tel" id="mobile" name="mobile" placeholder="0734568978" required pattern="[0-9]{4}[0-9]{3}[0-9]{3}">
+                        <input type="tel" id="mobile" name="mobile" placeholder="0734568978" required pattern="[0-9]{4}[0-9]{3}[0-9]{3}" th:value="${userDetails.getPhoneNumber()}">
                         <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required th:value="${userDetails.getEmail()}">
                         <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-                        <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required>
+                        <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required th:value="${userDetails.getAddress()}">
                         <label for="city"><i class="fa fa-institution"></i> City</label>
-                        <input type="text" id="city" name="city" placeholder="New York" required>
+                        <input type="text" id="city" name="city" placeholder="New York" required th:value="${userDetails.getCity()}">
 
                         <div class="row">
                             <div class="col-50">
                                 <label for="county">County</label>
-                                <input type="text" id="county" name="county" placeholder="NY" required>
+                                <input type="text" id="county" name="county" placeholder="NY" required th:value="${userDetails.getCounty()}">
                             </div>
                             <div class="col-50">
                                 <label for="zip">Zip</label>
-                                <input type="text" id="zip" name="zip" placeholder="900083" required pattern="[0-9]*" maxlength="6">
+                                <input type="text" id="zip" name="zip" placeholder="900083" required pattern="[0-9]*" maxlength="6" th:value="${userDetails.getZipCode()}">
                             </div>
                         </div>
                     </div>

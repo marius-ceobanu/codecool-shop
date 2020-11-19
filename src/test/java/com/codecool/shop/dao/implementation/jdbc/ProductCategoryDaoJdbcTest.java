@@ -3,8 +3,11 @@ package com.codecool.shop.dao.implementation.jdbc;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.manager.DatabaseManager;
 import com.codecool.shop.model.ProductCategory;
-import org.junit.jupiter.api.*;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

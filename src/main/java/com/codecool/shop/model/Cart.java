@@ -80,7 +80,7 @@ public class Cart {
         StringBuilder products = new StringBuilder();
         for(CartItem cartItem : cartItems) {
             products.append(cartItem.getProduct().getName())
-                    .append(" X ")
+                    .append(" *")
                     .append(cartItem.getQuantity())
                     .append(", ");
         }
