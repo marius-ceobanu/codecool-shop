@@ -210,16 +210,10 @@ Razvan Grigore - [@My Github](https://github.com/rgrigore) - razvang95@gmail.com
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* [Software testing](/pages/general/software-testing)
-* [Positive or negative](https://stackoverflow.com/questions/8162423)
-* [How to design classes](/pages/java/how-to-design-classes)
-* [Introduction to jdbc](/pages/java/introduction-to-jdbc)
-* [jdbc basics](https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html)
-* [DAO pattern in Java](https://www.baeldung.com/java-dao-pattern)
-* [Serialization in Java](/pages/java/serialization-in-java)
-* [Compare two popular serialization framwork](https://www.baeldung.com/jackson-vs-gson)
-* [1-Bit Pack by Kenney - Graphic Tiles](https://kenney.nl/assets/bit-pack)
-* [CC0 1.0 Universal license](https://creativecommons.org/publicdomain/zero/1.0/)
+* [Java Dao pattern](https://www.baeldung.com/java-dao-pattern)
+* [Introducing servlets](project/curriculum/materials/pages/java/introducing-servlets.md)
+* [Servlet tutorial](https://www.tutorialspoint.com/servlets/servlets-form-data.htm)
+* [Java properties](https://www.baeldung.com/java-properties)
 * [Codecool Romania :thumbsup:](https://codecool.com/ro/)
 * [Img Shields](https://shields.io)
 
