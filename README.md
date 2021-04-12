@@ -245,7 +245,7 @@ Razvan Grigore - [@My Github](https://github.com/rgrigore) - razvang95@gmail.com
 [registration-png]: src/main/resources/register.png
 [account-confirmation-png]: src/main/resources/account_confirmation.png
 [login-gif]: src/main/resources/login.gif
-[buy-png]: src/main/resources/register.png
+[buy-png]: src/main/resources/adding-to-cart.png
 [cart-png]: src/main/resources/cart.png
 [checkout1-png]: src/main/resources/checkout1.png
 [checkout2-png]: src/main/resources/checkout2.png
