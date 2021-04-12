@@ -185,8 +185,8 @@ The project development took place through 2 Agile iterations, each iteration ta
 
 [![agile][agile]]()
 
-* Sprint 1: Implementing main game logic and design the 2 maps.
-* Spring 2: Implementing the save & load option (saving system / DB storage / JSON save storage).
+* Sprint 1: Main page / Filters / Cart / Checkout / Order History (JSON file) / Confirmation email. 
+* Spring 2: Migrate to DB (PostgreSQL) / Implement JDBC / Registration email / Login / User details / Order history (DB) / Unit testing.
 
 <!-- CONTRIBUTING -->
 ## Contributing
