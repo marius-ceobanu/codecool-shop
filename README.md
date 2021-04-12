@@ -144,7 +144,7 @@ Further we will shortly name, describe and visualize some main features of the a
 * On the home page, the guest can see a carousel and listed all the products available in the shop (image / description / supplier / price).
 * The products can be sorted by type or brand.
 
-[![home1-gif][home1-gif]]()
+[![home-gif][home-gif]]()
 
 * The guest has the option to register and create a user account in order to be able to order. A confirmation email will be sent.
 
